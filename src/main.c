@@ -6,7 +6,7 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 20:22:50 by ysibous           #+#    #+#             */
-/*   Updated: 2018/03/30 15:26:56 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/03/30 16:45:53 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,39 @@ t_file_info		*init_file_info(void)
 	t_file_info *root;
 
 	root = (t_file_info *)ft_memalloc(sizeof(t_file_info));
-	root->is_dir = 0;
-//	root->parent = root;
+	root->f_type = 0;
+	root->m_time = 0;
+	root->num_links = 0;
+	root->owner_name = 0;
+	root->o_read = 0;
+	root->o_write = 0;
+	root->o_exec = 0;
+	root->g_read = 0;
+	root->g_write = 0;
+	root->g_exec = 0;
+	root->a_read = 0;
+	root->a_write = 0;
+	root->a_exec = 0;
 	root->next = NULL;
-//	root->files = (t_file_info *)ft_memalloc(sizeof(t_file_info));
 	return (root);
+}
+
+void			set_file_type(t_file_info *new, struct stat *buff)
+{
+	if (S_ISDIR(buff->st_mode))
+		new->f_type = 'd';
+	if (S_ISREG(buff->st_mode))
+		new->f_type = '-';
+	if (S_ISFIFO(buff->st_mode))
+		new->f_type = 'p';
+	if (S_ISCHR(buff->st_mode))
+		new->f_type = 'c';
+	if (S_ISBLK(buff->st_mode))
+		new->f_type = 'b';
+	if (S_ISDIR(buff->st_mode))
+		new->f_type = 'l';
+	if (S_ISDIR(buff->st_mode))
+		new->f_type = 's';
 }
 
 t_file_info		*get_file_info(char *str)
@@ -41,9 +69,9 @@ t_file_info		*get_file_info(char *str)
 	root->name = ft_strnew(ft_strlen(str));
 	lstat(str, buff);
 	root->name = str;
-	if (S_ISDIR(buff->st_mode))
+	set_file_type(root, buff);
+	if (root->f_type == 'd')
 	{
-		root->is_dir = 1;
 		d = opendir(str);
 		while ((dir = readdir(d)))
 		{
@@ -51,8 +79,8 @@ t_file_info		*get_file_info(char *str)
 			new->name = ft_strnew(ft_strlen(dir->d_name));
 			new->name = dir->d_name;
 			lstat(new->name, buff);
-			if (S_ISDIR(buff->st_mode))
-				new->is_dir = 1;
+			set_file_type(new, buff);
+			new->m_time = buff->st_mtime;
 			root->next = new;
 			root = root->next;
 		}
@@ -71,7 +99,7 @@ void	print_lst_info(t_file_info *root)
 {
 	while (root)
 	{
-		printf("%s\n", root->name);
+		printf("%d\n", root->m_time);
 		root = root->next;
 	}
 }
