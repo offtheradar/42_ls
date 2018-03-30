@@ -6,20 +6,22 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 11:17:39 by ysibous           #+#    #+#             */
-/*   Updated: 2018/03/28 15:42:10 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/03/28 18:55:42 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-void	init_options(t_options *opt)
+t_options	*init_options(void)
 {
+	t_options *opt;
 	opt = (t_options *)ft_memalloc(sizeof(t_options));
 	opt->l = 0;
 	opt->R = 0;
 	opt->a = 0;
 	opt->r = 0;
 	opt->t = 0;
+	return (opt);
 }
 
 void	set_options(char *options, t_options *opt)
