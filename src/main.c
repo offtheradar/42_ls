@@ -6,7 +6,7 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 20:22:50 by ysibous           #+#    #+#             */
-/*   Updated: 2018/03/30 16:45:53 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/02 11:02:07 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,19 @@ t_file_info		*init_file_info(void)
 void			set_file_type(t_file_info *new, struct stat *buff)
 {
 	if (S_ISDIR(buff->st_mode))
-		new->f_type = 'd';
+		(new)->f_type = 'd';
 	if (S_ISREG(buff->st_mode))
-		new->f_type = '-';
+		(new)->f_type = '-';
 	if (S_ISFIFO(buff->st_mode))
-		new->f_type = 'p';
+		(new)->f_type = 'p';
 	if (S_ISCHR(buff->st_mode))
-		new->f_type = 'c';
+		(new)->f_type = 'c';
 	if (S_ISBLK(buff->st_mode))
-		new->f_type = 'b';
-	if (S_ISDIR(buff->st_mode))
-		new->f_type = 'l';
-	if (S_ISDIR(buff->st_mode))
-		new->f_type = 's';
+		(new)->f_type = 'b';
+	if (S_ISLNK(buff->st_mode))
+		(new)->f_type = 'l';
+	/*if (S_ISDIR(buff->st_mode))
+		(new)->f_type = 's';*/
 }
 
 t_file_info		*get_file_info(char *str)
@@ -70,8 +70,10 @@ t_file_info		*get_file_info(char *str)
 	lstat(str, buff);
 	root->name = str;
 	set_file_type(root, buff);
+	printf("file type is %c\n", root->f_type);
 	if (root->f_type == 'd')
 	{
+		printf("hello world\n");
 		d = opendir(str);
 		while ((dir = readdir(d)))
 		{
@@ -95,11 +97,15 @@ void	order_f_info_lst(t_file_info **root, t_options *opt)
 	return ;
 }
 */
-void	print_lst_info(t_file_info *root)
+void	print_lst_info(t_file_info *root, t_options *opt)
 {
 	while (root)
 	{
-		printf("%d\n", root->m_time);
+		if (!opt->a && root->name[0] != '.')
+		{
+			printf("%s ", root->name);
+			printf("%d\n", root->m_time);
+		}
 		root = root->next;
 	}
 }
@@ -127,7 +133,7 @@ int		main(int argc, char **argv)
 	while (i < argc)
 	{
 		root = get_file_info(argv[i]);
-		print_lst_info(root);
+		print_lst_info(root, opt);
 /*
 		if (opt->t || opt->r)
 			order_f_info_lst(&root,opt);
