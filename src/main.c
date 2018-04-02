@@ -6,7 +6,7 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 20:22:50 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/02 11:02:07 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/02 11:03:27 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,10 @@ t_file_info		*get_file_info(char *str)
 	root->name = ft_strnew(ft_strlen(str));
 	lstat(str, buff);
 	root->name = str;
+	root->m_time = buff->st_mtime;
 	set_file_type(root, buff);
-	printf("file type is %c\n", root->f_type);
 	if (root->f_type == 'd')
 	{
-		printf("hello world\n");
 		d = opendir(str);
 		while ((dir = readdir(d)))
 		{
