@@ -6,7 +6,7 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 21:01:29 by ysibous           #+#    #+#             */
-/*   Updated: 2018/03/30 16:39:46 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/02 21:19:47 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef	struct		s_file_info
 	int		m_time;
 	int		num_links;
 	char	*owner_name;
+	char	*group_name;
 	char	o_read;
 	char	o_write;
 	char	o_exec;
