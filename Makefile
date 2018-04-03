@@ -6,7 +6,7 @@
 #    By: ysibous <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/23 18:15:35 by ysibous           #+#    #+#              #
-#    Updated: 2018/03/28 15:49:54 by ysibous          ###   ########.fr        #
+#    Updated: 2018/04/03 11:17:51 by ysibous          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ all: $(NAME)
 LIBFT = includes/libft/libft.a
 
 mlibft.a: 
-		make -C includes -C libft re
+		make -C includes -C libft
 
 $(NAME): mlibft.a
 	$(CC) $(CFLAGS) $(NAME) $(SRC) $(LIBFT)

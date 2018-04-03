@@ -6,13 +6,11 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 20:22:50 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/02 21:23:55 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/03 12:01:26 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
-#include <pwd.h>
-#include <grp.h>
 #include <stdio.h>
 
 t_file_info		*init_file_info(void)
@@ -23,7 +21,10 @@ t_file_info		*init_file_info(void)
 	root->f_type = 0;
 	root->m_time = 0;
 	root->num_links = 0;
+	root->size = 0;
+	root->num_links = 0;
 	root->owner_name = 0;
+	root->group_name = 0;
 	root->o_read = 0;
 	root->o_write = 0;
 	root->o_exec = 0;
@@ -33,6 +34,7 @@ t_file_info		*init_file_info(void)
 	root->a_read = 0;
 	root->a_write = 0;
 	root->a_exec = 0;
+	root->size = 0;
 	root->next = NULL;
 	return (root);
 }
@@ -81,8 +83,8 @@ t_file_info		*get_file_info(char *str)
 
 	root = init_file_info();
 	start = root;
-	buff = (struct stat *)ft_memalloc(sizeof(struct stat));
-	dir = (struct dirent *)ft_memalloc(sizeof(struct dirent));
+	buff = malloc(sizeof(struct stat));
+	dir = malloc(sizeof(struct dirent));
 	root->name = ft_strnew(ft_strlen(str));
 	lstat(str, buff);
 	root->name = str;
@@ -91,12 +93,16 @@ t_file_info		*get_file_info(char *str)
 	root->group_name = grp->gr_name;
 	pw = (getpwuid(buff->st_uid));
 	root->owner_name = pw->pw_name;
+	root->size = buff->st_size;
+	root->num_links = buff->st_nlink;
 	set_file_type(root, buff);
 	if (root->f_type == 'd')
 	{
 		d = opendir(str);
 		while ((dir = readdir(d)))
 		{
+			free(buff);
+			buff = malloc(sizeof(struct stat));
 			new = init_file_info();
 			new->name = ft_strnew(ft_strlen(dir->d_name));
 			new->name = dir->d_name;
@@ -107,9 +113,12 @@ t_file_info		*get_file_info(char *str)
 			new->owner_name = pw->pw_name;
 			grp = getgrgid(buff->st_gid);
 			new->group_name = grp->gr_name;
+			new->size = buff->st_size;
+			new->num_links = buff->st_nlink;
 			root->next = new;
 			root = root->next;
 		}
+		free(buff);
 		root->next = NULL;
 		closedir(d);
 	}
@@ -123,14 +132,18 @@ void	order_f_info_lst(t_file_info **root, t_options *opt)
 */
 void	print_lst_info(t_file_info *root, t_options *opt)
 {
+	opt = 0;
 	while (root)
 	{
-		if (!opt->a && root->name[0] != '.')
-		{
+	/*	if (!opt->a && root->name[0] != '.')
+		{*/
+			printf("%d ", root->num_links);
 			printf("%s ", root->group_name);
 			printf("%s ", root->owner_name);
-			printf("%d\n", root->m_time);
-		}
+			printf("%d ", root->size);
+			printf("%d ", root->m_time);
+			printf("%s\n", root->name);
+		//}
 		root = root->next;
 	}
 }
@@ -147,32 +160,39 @@ void	free_f_info_lst(t_file_info **root)
 	}
 }
 
+void	ft_ls(t_options *opt, char *file_name)
+{
+	t_file_info	*root;
+	t_file_info *start;
+
+	root = get_file_info(file_name);
+	start = root;
+	print_lst_info(root, opt);
+	if (opt->R)
+	{
+		while (root)
+		{
+			if (root->f_type == 'd')
+				ft_ls(opt, root->name);
+			root = root->next;
+		}
+	}
+	free_f_info_lst(&start);
+}
+
 int		main(int argc, char **argv)
 {
 	int  i;
-	t_file_info *root;
 	t_options *opt;
 	opt = init_options();
 	//i = get_options(argc, argv, opt);
 	i = 1;
 	while (i < argc)
 	{
-		root = get_file_info(argv[i]);
-		print_lst_info(root, opt);
-/*
-		if (opt->t || opt->r)
-			order_f_info_lst(&root,opt);
-		if (opt->R)
-	
-		{
-			while (root)
-			{
-				if (root->is_dir)
-					main()
-			}
-		}*/
-		free_f_info_lst(&root);
+		ft_ls(opt, argv[i]);
 		i++;
 	}
+	while (1)
+	{;}
 	return (0);
 }

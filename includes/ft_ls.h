@@ -6,7 +6,7 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 21:01:29 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/02 21:19:47 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/03 11:07:02 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # include "libft/libft.h"
 # include <sys/stat.h>
 # include <dirent.h>
+# include <grp.h>
+# include <pwd.h>
+# include <time.h>
 
 typedef struct		s_options
 {
@@ -30,6 +33,7 @@ typedef	struct		s_file_info
 	//int		is_hidden;
 	char	f_type;
 	int		m_time;
+	int		size;
 	int		num_links;
 	char	*owner_name;
 	char	*group_name;
