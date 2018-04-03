@@ -6,7 +6,7 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 21:01:29 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/03 11:07:02 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/04/03 12:12:25 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,12 @@ typedef	struct		s_file_info
 	struct s_file_info *next;
 }					t_file_info;
 
+t_file_info			*init_file_info(void);
+
+void				set_file_type(t_file_info *root, struct stat *buff);
+
+void				set_file_permissions(t_file_info *root, struct stat *buff);
+
 t_options			*init_options(void);
 
 void				set_options(char *options, t_options *opt);
@@ -56,4 +62,10 @@ void				set_options(char *options, t_options *opt);
 int					get_options(int argc, char **argv, t_options *opt);
 
 t_file_info			*get_file_info(char *str);
+
+void				print_lst_info(t_file_info *root, t_options *opt);
+
+void				free_f_info_lst(t_file_info **root);
+
+void				ft_ls(t_options *opt, char *file_name);
 #endif
