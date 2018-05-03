@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 21:01:29 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/03 12:12:25 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/03 11:40:42 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef	struct		s_file_info
 	int		num_links;
 	char	*owner_name;
 	char	*group_name;
+	char	*path_name;
 	char	o_read;
 	char	o_write;
 	char	o_exec;
@@ -65,7 +66,7 @@ t_file_info			*get_file_info(char *str);
 
 void				print_lst_info(t_file_info *root, t_options *opt);
 
-void				free_f_info_lst(t_file_info **root);
+void				free_f_info_lst(t_file_info *root);
 
 void				ft_ls(t_options *opt, char *file_name);
 #endif

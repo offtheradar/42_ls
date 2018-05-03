@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_lst.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:15:11 by ysibous           #+#    #+#             */
-/*   Updated: 2018/04/03 12:15:50 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/03 10:43:30 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ void	print_lst_info(t_file_info *root, t_options *opt)
 	{
 	/*	if (!opt->a && root->name[0] != '.')
 		{*/
-			printf("%d ", root->num_links);
-			printf("%s ", root->group_name);
-			printf("%s ", root->owner_name);
-			printf("%d ", root->size);
-			printf("%d ", root->m_time);
+			//printf("%d ", root->num_links);
+			//printf("%s ", root->group_name);
+			//printf("%s ", root->owner_name);
+			//printf("%d ", root->size);
+			//printf("%d ", root->m_time);
 			printf("%s\n", root->name);
 		//}
 		root = root->next;
