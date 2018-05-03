@@ -6,7 +6,7 @@
 /*   By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 20:22:50 by ysibous           #+#    #+#             */
-/*   Updated: 2018/05/03 11:40:09 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/03 15:56:02 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_ls(t_options *opt, char *file_name)
 	start = root;
 	//order_f_info_lst(&root, opt);
 	print_lst_info(root, opt);
-	/*if (opt->R)
+	if (opt->R)
 	{
 		while (root)
 		{
@@ -30,7 +30,7 @@ void	ft_ls(t_options *opt, char *file_name)
 				ft_ls(opt, root->name);
 			root = root->next;
 		}
-	//}*/
+	}
 	free_f_info_lst(start);
 }
 
