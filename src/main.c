@@ -6,7 +6,7 @@
 /*   By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 20:22:50 by ysibous           #+#    #+#             */
-/*   Updated: 2018/05/03 15:56:02 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/03 16:49:27 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	ft_ls(t_options *opt, char *file_name)
 	{
 		while (root)
 		{
-			if (root->f_type == 'd')
+			if (root->f_type == 'd' && !ft_strcmp(".", root->name) &&
+						!ft_strcmp("..", root->name))
 				ft_ls(opt, root->name);
 			root = root->next;
 		}
@@ -36,8 +37,9 @@ void	ft_ls(t_options *opt, char *file_name)
 
 int		main(int argc, char **argv)
 {
-	int  i;
-	t_options *opt;
+	int			i;
+	t_options	*opt;
+
 	opt = init_options();
 	i = get_options(argc, argv, opt);
 	if (i == argc)
@@ -49,7 +51,5 @@ int		main(int argc, char **argv)
 			i++;
 		}
 	free(opt);
-	while (1)
-	{;}
 	return (0);
 }

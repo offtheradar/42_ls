@@ -6,7 +6,7 @@
 /*   By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:15:11 by ysibous           #+#    #+#             */
-/*   Updated: 2018/05/03 14:41:06 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/03 16:28:53 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	print_lst_info(t_file_info *root, t_options *opt)
 			//printf("%s ", root->owner_name);
 			//printf("%d ", root->size);
 			//printf("%d ", root->m_time);
-			printf("%s\n", root->name);
+			if (root->name[0] != '.')
+				printf("%s\n", root->name);
 		//}
 		root = root->next;
 	}
