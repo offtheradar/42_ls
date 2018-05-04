@@ -6,7 +6,7 @@
 /*   By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:12:51 by ysibous           #+#    #+#             */
-/*   Updated: 2018/05/03 22:29:16 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/03 23:29:41 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,9 @@ t_file_info		*get_file_info(char *str)
 	if (root->f_type == 'd')
 	{
 		d = opendir(str);
-		path = ft_strdup(root->name);
-		path = ft_strjoin(path, "/");
+		tmp = ft_strdup(root->name);
+		path = ft_strjoin(tmp, "/");
+		free(tmp);
 		while ((dir = readdir(d)))
 		{
 			free(buff);
