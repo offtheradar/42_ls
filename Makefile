@@ -6,7 +6,7 @@
 #    By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/03 19:08:41 by ysibous           #+#    #+#              #
-#    Updated: 2018/05/04 12:58:20 by ysibous          ###   ########.fr        #
+#    Updated: 2018/05/04 13:37:06 by ysibous          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,4 +30,4 @@ mlibft.a:
 	make -C includes -C libft
 
 $(NAME): mlibft.a
-	$(CC) $(CFLAGS) $(NAME) $(SRC) $(LIBFT) -fsanitize=address
+	$(CC) $(CFLAGS) $(NAME) $(SRC) $(LIBFT) #-fsanitize=address

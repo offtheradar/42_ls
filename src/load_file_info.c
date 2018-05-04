@@ -6,7 +6,7 @@
 /*   By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:12:51 by ysibous           #+#    #+#             */
-/*   Updated: 2018/05/04 12:54:51 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/04 13:41:41 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,14 @@ t_file_info		*get_file_info(char *str)
 	t_file_info		*new;
 	t_file_info		*root;
 	t_file_info		*start;
-	DIR				*d = NULL;
-	struct dirent	*dir = NULL;
+	DIR				*d;
+	struct dirent	*dir;
 	char			*path;
 	char			*tmp;
 
+
+	d = NULL;
+	dir = NULL;
 	root = init_file_info();
 	start = root;
 	buff = ft_memalloc(sizeof(struct stat));
@@ -116,7 +119,7 @@ t_file_info		*get_file_info(char *str)
 			lstat(tmp, buff);
 			free(tmp);
 			set_file_type(new, buff);
-			set_file_permissions(root, buff);
+			set_file_permissions(new, buff);
 			new->m_time = ctime(&(buff->st_mtime));
 			if ((pw = (getpwuid(buff->st_uid))) != NULL)
 				new->owner_name = ft_strdup((char *)(pw->pw_name));
@@ -133,10 +136,15 @@ t_file_info		*get_file_info(char *str)
 		root->next = NULL;
 		closedir(d);
 	}
+	else
+	{
+		free(buff);
+		root->next = NULL;
+	}
 	return (start);
 }
 
-void	free_f_info_lst(t_file_info *root)
+void			free_f_info_lst(t_file_info *root)
 {
 	t_file_info *tmp;
 
