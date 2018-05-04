@@ -6,7 +6,7 @@
 /*   By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:12:51 by ysibous           #+#    #+#             */
-/*   Updated: 2018/05/03 11:55:47 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/03 22:29:16 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_file_info		*init_file_info(void)
 	root->a_write = 0;
 	root->a_exec = 0;
 	root->size = 0;
+	root->to_visit = 0;
 	root->next = NULL;
 	return (root);
 }
@@ -82,13 +83,15 @@ t_file_info		*get_file_info(char *str)
 	t_file_info		*start;
 	DIR				*d = NULL;
 	struct dirent	*dir = NULL;
+	char			*path;
+	char			*tmp;
 
 	root = init_file_info();
 	start = root;
 	buff = ft_memalloc(sizeof(struct stat));
 	root->name = ft_strdup(str);
 	lstat(str, buff);
-	root->m_time = buff->st_mtime;
+	root->m_time = ctime(&(buff->st_mtime));
 	grp = getgrgid(buff->st_gid);
 	root->group_name = ft_strdup(grp->gr_name);
 	pw = (getpwuid(buff->st_uid));
@@ -96,18 +99,24 @@ t_file_info		*get_file_info(char *str)
 	root->size = buff->st_size;
 	root->num_links = buff->st_nlink;
 	set_file_type(root, buff);
+	set_file_permissions(root, buff);
 	if (root->f_type == 'd')
 	{
 		d = opendir(str);
+		path = ft_strdup(root->name);
+		path = ft_strjoin(path, "/");
 		while ((dir = readdir(d)))
 		{
 			free(buff);
 			buff = ft_memalloc(sizeof(struct stat));
 			new = init_file_info();
 			new->name = ft_strdup(dir->d_name);
-			lstat(new->name, buff);
+			tmp = ft_strjoin(path, new->name);
+			lstat(tmp, buff);
+			free(tmp);
 			set_file_type(new, buff);
-			new->m_time = buff->st_mtime;
+			set_file_permissions(root, buff);
+			new->m_time = ctime(&(buff->st_mtime));
 			if ((pw = (getpwuid(buff->st_uid))) != NULL)
 				new->owner_name = ft_strdup((char *)(pw->pw_name));
 			if ((grp = getgrgid(buff->st_gid)) != NULL)
@@ -117,6 +126,7 @@ t_file_info		*get_file_info(char *str)
 			root->next = new;
 			root = root->next;
 		}
+		free(path);
 		free(dir);
 		free(buff);
 		root->next = NULL;

@@ -6,7 +6,7 @@
 /*   By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 21:01:29 by ysibous           #+#    #+#             */
-/*   Updated: 2018/05/03 11:40:42 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/03 21:15:22 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <grp.h>
 # include <pwd.h>
 # include <time.h>
+# define NOT_CURR_DIR(x) (ft_strcmp(x->name, ".") && ft_strcmp(x->name, ".."))
 
 typedef struct		s_options
 {
@@ -29,12 +30,13 @@ typedef struct		s_options
 
 typedef	struct		s_file_info
 {
-	char				*name;
+	char	*name;
 	//int		is_hidden;
 	char	f_type;
-	int		m_time;
+	char	*m_time;
 	int		size;
 	int		num_links;
+	int		to_visit;
 	char	*owner_name;
 	char	*group_name;
 	char	*path_name;

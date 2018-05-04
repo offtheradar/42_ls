@@ -6,28 +6,46 @@
 /*   By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:15:11 by ysibous           #+#    #+#             */
-/*   Updated: 2018/05/03 16:28:53 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/03 22:31:49 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
+#include <time.h>
 #include <stdio.h>
+
+void	print_permissions(t_file_info *root)
+{
+	printf("%c%c%c%c%c%c%c%c%c%c ", root->f_type, root->o_read, root->o_write,
+			root->o_exec, root->g_read, root->g_write, root->g_exec,
+			root->a_read, root->a_write, root->a_exec);
+}
 
 void	print_lst_info(t_file_info *root, t_options *opt)
 {
-	opt = 0;
-	while (root)
+	int i;
+	t_file_info *first;
+
+	i = 3;
+	first = root;
+	while (root && opt)
 	{
-	/*	if (!opt->a && root->name[0] != '.')
-		{*/
-			//printf("%d ", root->num_links);
-			//printf("%s ", root->group_name);
-			//printf("%s ", root->owner_name);
-			//printf("%d ", root->size);
-			//printf("%d ", root->m_time);
-			if (root->name[0] != '.')
-				printf("%s\n", root->name);
-		//}
+		if (root == first)
+			printf("%s\n", root->name);
+		else if (ft_strcmp(root->name, ".") != 0 && ft_strcmp(root->name, "..") != 0)
+		{
+			print_permissions(root);
+			printf("%d ", root->num_links);
+			printf("%s ", root->owner_name);
+			printf("%s ", root->group_name);
+			printf("%d ", root->size);
+			i = 3;
+			while (++i < 16)
+				printf("%c", root->m_time[i]);
+			printf(" ");
+			printf("%s\n", root->name);
+		}
 		root = root->next;
 	}
+	printf("\n\n");
 }

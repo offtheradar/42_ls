@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ysibous <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/03/23 18:15:35 by ysibous           #+#    #+#              #
-#    Updated: 2018/05/03 10:59:11 by ysibous          ###   ########.fr        #
+#    Created: 2018/05/03 19:08:41 by ysibous           #+#    #+#              #
+#    Updated: 2018/05/03 22:46:02 by ysibous          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls
 
-CC = clang 
+CC = gcc
 CFLAGS = -Wall -Wextra -Werror -o
 
 FILES = main.c
@@ -27,7 +27,7 @@ all: $(NAME)
 LIBFT = includes/libft/libft.a
 
 mlibft.a: 
-		make -C includes -C libft
+	make -C includes -C libft
 
 $(NAME): mlibft.a
-	$(CC) $(CFLAGS) $(NAME) $(SRC) $(LIBFT) #-fsanitize=address 
+	$(CC) $(CFLAGS) $(NAME) $(SRC) $(LIBFT) -fsanitize=address

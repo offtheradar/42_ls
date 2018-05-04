@@ -6,11 +6,11 @@
 /*   By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:21:27 by ysibous           #+#    #+#             */
-/*   Updated: 2018/05/03 10:26:52 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/03 19:11:24 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_ls.h"
+#include "../includes/ft_ls.h"
 
 void	order_f_info_lst(t_file_info **root, t_options *opt)
 {
