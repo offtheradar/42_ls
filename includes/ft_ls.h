@@ -6,7 +6,7 @@
 /*   By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 21:01:29 by ysibous           #+#    #+#             */
-/*   Updated: 2018/05/04 19:02:32 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/04 19:13:00 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct		s_options
 typedef	struct		s_file_info
 {
 	char	*name;
-	//int		is_hidden;
 	char	f_type;
 	char	*m_time;
 	int		m_time_num;

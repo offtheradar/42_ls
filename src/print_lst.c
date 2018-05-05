@@ -6,7 +6,7 @@
 /*   By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:15:11 by ysibous           #+#    #+#             */
-/*   Updated: 2018/05/04 17:28:31 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/04 19:14:45 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	print_lst_info(t_file_info *root, t_options *opt)
 	first = root;
 	while (root)
 	{
-		if (root == first && root->name[0] != '.')
+		if (root == first)
 			printf("%s:\n", root->name);
 		if (opt->l && root != first)
 		{
