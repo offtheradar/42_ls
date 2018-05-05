@@ -6,7 +6,7 @@
 /*   By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:15:11 by ysibous           #+#    #+#             */
-/*   Updated: 2018/05/05 13:13:33 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/05 13:23:14 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,20 @@ void	print_time(t_file_info *root)
 	printf(" ");
 }
 
-int		add_blocks(t_file_info *root)
+int		add_blocks(t_file_info *root, t_options *opt)
 {
 	t_file_info		*tmp;
 	int				num_blocks;
 
 	tmp = root;
+	tmp = tmp->next;
 	num_blocks = 0;
 	while (tmp)
 	{
-		num_blocks += tmp->blocks;
+		if (!opt->a && tmp->name[0] == '.')
+			;
+		else
+			num_blocks += tmp->blocks;
 		tmp = tmp->next;
 	}
 	return (num_blocks);
@@ -57,7 +61,7 @@ void	print_lst_info(t_file_info *root, t_options *opt)
 		{
 			printf("%s:\n", root->name);
 			if (opt->l)
-				printf("total %d\n", add_blocks(root));
+				printf("total %d\n", add_blocks(root, opt));
 		}
 		else if (root->name[0] == '.' && !opt->a)
 			;
