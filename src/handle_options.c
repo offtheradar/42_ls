@@ -6,7 +6,7 @@
 /*   By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 11:17:39 by ysibous           #+#    #+#             */
-/*   Updated: 2018/05/04 19:10:42 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/05 12:05:11 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_options	*init_options(void)
 
 	opt = (t_options *)ft_memalloc(sizeof(t_options));
 	opt->l = 0;
-	opt->R = 0;
+	opt->ur = 0;
 	opt->a = 0;
 	opt->r = 0;
 	opt->t = 0;
@@ -30,7 +30,7 @@ void		set_options(char *options, t_options *opt)
 	if (ft_strchr(options, 'l'))
 		opt->l = 1;
 	if (ft_strchr(options, 'R'))
-		opt->R = 1;
+		opt->ur = 1;
 	if (ft_strchr(options, 'a'))
 		opt->a = 1;
 	if (ft_strchr(options, 'r'))

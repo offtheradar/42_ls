@@ -6,7 +6,7 @@
 #    By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/03 19:08:41 by ysibous           #+#    #+#              #
-#    Updated: 2018/05/04 19:13:57 by ysibous          ###   ########.fr        #
+#    Updated: 2018/05/05 12:24:04 by ysibous          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ CC = clang -g
 CFLAGS = -Wall -Wextra -Werror -o
 
 FILES = main.c
+FILES += ft_ls.c
 FILES += handle_options.c
 FILES += load_file_info.c
 FILES += print_lst.c

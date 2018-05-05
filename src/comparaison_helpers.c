@@ -6,7 +6,7 @@
 /*   By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 18:53:44 by ysibous           #+#    #+#             */
-/*   Updated: 2018/05/04 19:08:17 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/05 12:15:45 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,6 @@ int			f_time_cmp_r(t_file_info *a, t_file_info *b)
 		return (1);
 	else if (a->m_time_num == b->m_time_num)
 		return (f_name_cmp_r(a, b));
-    else
-        return (0);
+	else
+		return (0);
 }

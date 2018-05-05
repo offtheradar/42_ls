@@ -6,7 +6,7 @@
 /*   By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:15:11 by ysibous           #+#    #+#             */
-/*   Updated: 2018/05/04 19:14:45 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/05 13:13:33 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,21 @@ void	print_time(t_file_info *root)
 	printf(" ");
 }
 
+int		add_blocks(t_file_info *root)
+{
+	t_file_info		*tmp;
+	int				num_blocks;
+
+	tmp = root;
+	num_blocks = 0;
+	while (tmp)
+	{
+		num_blocks += tmp->blocks;
+		tmp = tmp->next;
+	}
+	return (num_blocks);
+}
+
 void	print_lst_info(t_file_info *root, t_options *opt)
 {
 	t_file_info *first;
@@ -39,19 +54,25 @@ void	print_lst_info(t_file_info *root, t_options *opt)
 	while (root)
 	{
 		if (root == first)
-			printf("%s:\n", root->name);
-		if (opt->l && root != first)
 		{
-			if (root->name[0] != '.')
+			printf("%s:\n", root->name);
+			if (opt->l)
+				printf("total %d\n", add_blocks(root));
+		}
+		else if (root->name[0] == '.' && !opt->a)
+			;
+		else
+		{
+			if (opt->l && root != first)
 			{
 				print_permissions(root);
 				printf("%d %s %s %d ", root->num_links, root->owner_name,
 										root->group_name, root->size);
 				print_time(root);
 			}
+			if (root != first)
+				printf("%s\n", root->name);
 		}
-		if (root->name[0] != '.' && root != first)
-			printf("%s\n", root->name);
 		root = root->next;
 	}
 	printf("\n");

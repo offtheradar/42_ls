@@ -6,7 +6,7 @@
 /*   By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 21:01:29 by ysibous           #+#    #+#             */
-/*   Updated: 2018/05/04 19:13:00 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/05 12:47:29 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,43 +22,50 @@
 typedef struct		s_options
 {
 	int		l;
-	int		R;
+	int		ur;
 	int		a;
 	int		r;
 	int		t;
 }					t_options;
 
-typedef	struct		s_file_info
+typedef	struct			s_file_info
 {
-	char	*name;
-	char	f_type;
-	char	*m_time;
-	int		m_time_num;
-	int		size;
-	int		num_links;
-	int		to_visit;
-	char	*owner_name;
-	char	*group_name;
-	char	*path_name;
-	char	o_read;
-	char	o_write;
-	char	o_exec;
-	char	g_read;
-	char	g_write;
-	char	g_exec;
-	char	a_read;
-	char	a_write;
-	char	a_exec;
-	struct s_file_info *next;
-}					t_file_info;
+	char				*name;
+	char				f_type;
+	char				*m_time;
+	long int			m_time_num;
+	int					blocks;
+	int					size;
+	int					num_links;
+	int					to_visit;
+	char				*owner_name;
+	char				*group_name;
+	char				*path_name;
+	char				o_read;
+	char				o_write;
+	char				o_exec;
+	char				g_read;
+	char				g_write;
+	char				g_exec;
+	char				a_read;
+	char				a_write;
+	char				a_exec;
+	struct s_file_info	*next;
+}						t_file_info;
 
 void				ft_ls(t_options *opt, char *file_name);
 
-t_file_info			*init_file_info(void);
+/*
+******************************* ls Helpers *************************************
+*/
 
-void				set_file_type(t_file_info *root, struct stat *buff);
+void				visit_dir(t_file_info *root, char *file_name);
 
-void				set_file_permissions(t_file_info *root, struct stat *buff);
+char				*create_path(char *file_name, t_file_info *root);
+
+/*
+******************************* Options ****************************************
+*/
 
 t_options			*init_options(void);
 
@@ -66,11 +73,31 @@ void				set_options(char *options, t_options *opt);
 
 int					get_options(int argc, char **argv, t_options *opt);
 
+/*
+******************************* List Constructors ******************************
+*/
+
 t_file_info			*get_file_info(char *str);
+
+t_file_info			*init_file_info(void);
+
+void				set_file_type(t_file_info *root, struct stat *buff);
+
+void				set_file_permissions(t_file_info *root, struct stat *buff);
+
+t_file_info			*init_file_info(void);
+
+void				free_f_info_lst(t_file_info *root);
+
+/*
+******************************* Print ******************************************
+*/
 
 void				print_lst_info(t_file_info *root, t_options *opt);
 
-void				free_f_info_lst(t_file_info *root);
+void				print_time(t_file_info *root);
+
+void				print_permissions(t_file_info *root);
 
 /*
 ******************************* Sorting ****************************************
@@ -94,6 +121,5 @@ void				merge_sort(t_file_info **root,
 						int (*order)(t_file_info *a, t_file_info *b));
 
 void				order_lst(t_file_info **root, t_options *opt);
-
 
 #endif
