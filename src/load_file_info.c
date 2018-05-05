@@ -6,7 +6,7 @@
 /*   By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:12:51 by ysibous           #+#    #+#             */
-/*   Updated: 2018/05/04 13:41:41 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/04 17:34:10 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_file_info		*init_file_info(void)
 	root->a_exec = 0;
 	root->size = 0;
 	root->to_visit = 0;
+	root->m_time_num = 0;
 	root->next = NULL;
 	return (root);
 }
@@ -86,7 +87,6 @@ t_file_info		*get_file_info(char *str)
 	char			*path;
 	char			*tmp;
 
-
 	d = NULL;
 	dir = NULL;
 	root = init_file_info();
@@ -94,6 +94,7 @@ t_file_info		*get_file_info(char *str)
 	buff = ft_memalloc(sizeof(struct stat));
 	root->name = ft_strdup(str);
 	lstat(str, buff);
+	root->m_time_num = buff->st_mtime;
 	root->m_time = ctime(&(buff->st_mtime));
 	grp = getgrgid(buff->st_gid);
 	root->group_name = ft_strdup(grp->gr_name);
@@ -120,6 +121,7 @@ t_file_info		*get_file_info(char *str)
 			free(tmp);
 			set_file_type(new, buff);
 			set_file_permissions(new, buff);
+			new->m_time_num = buff->st_mtime;
 			new->m_time = ctime(&(buff->st_mtime));
 			if ((pw = (getpwuid(buff->st_uid))) != NULL)
 				new->owner_name = ft_strdup((char *)(pw->pw_name));
@@ -157,6 +159,8 @@ void			free_f_info_lst(t_file_info *root)
 			free((root)->group_name);
 		if ((root)->name)
 			free((root)->name);
+		if ((root)->path_name)
+			free(root->path_name);
 		root = (root)->next;
 		free(tmp);
 	}

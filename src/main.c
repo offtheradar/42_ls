@@ -6,7 +6,7 @@
 /*   By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 20:22:50 by ysibous           #+#    #+#             */
-/*   Updated: 2018/05/04 13:38:31 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/04 18:55:53 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	visit_dir(t_file_info *root, char *file_name)
 		tmp = tmp->next;
 	}
 }
- 
+
 void	ft_ls(t_options *opt, char *file_name)
 {
 	t_file_info	*root;
@@ -36,7 +36,7 @@ void	ft_ls(t_options *opt, char *file_name)
 
 	root = get_file_info(file_name);
 	start = root;
-	/*order_f_info_lst(&root, opt);*/
+	order_lst(&(root->next), opt);
 	print_lst_info(root, opt);
 	if (opt->R)
 	{
@@ -46,7 +46,7 @@ void	ft_ls(t_options *opt, char *file_name)
 			if (root->to_visit)
 			{
 				full_path = ft_strdup(file_name);
-				tmp = ft_strjoin(file_name, "/");
+				tmp = ft_strjoin(full_path, "/");
 				full_path = ft_strjoin(tmp, root->name);
 				free(tmp);
 				ft_ls(opt, full_path);
@@ -74,6 +74,5 @@ int		main(int argc, char **argv)
 			i++;
 		}
 	free(opt);
-	while (1){};
 	return (0);
 }

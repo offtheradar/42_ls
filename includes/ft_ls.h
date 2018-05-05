@@ -6,7 +6,7 @@
 /*   By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 21:01:29 by ysibous           #+#    #+#             */
-/*   Updated: 2018/05/03 21:15:22 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/04 19:02:32 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef	struct		s_file_info
 	//int		is_hidden;
 	char	f_type;
 	char	*m_time;
+	int		m_time_num;
 	int		size;
 	int		num_links;
 	int		to_visit;
@@ -51,6 +52,8 @@ typedef	struct		s_file_info
 	char	a_exec;
 	struct s_file_info *next;
 }					t_file_info;
+
+void				ft_ls(t_options *opt, char *file_name);
 
 t_file_info			*init_file_info(void);
 
@@ -70,5 +73,28 @@ void				print_lst_info(t_file_info *root, t_options *opt);
 
 void				free_f_info_lst(t_file_info *root);
 
-void				ft_ls(t_options *opt, char *file_name);
+/*
+******************************* Sorting ****************************************
+*/
+
+int					f_name_cmp(t_file_info *a, t_file_info *b);
+
+int					f_name_cmp_r(t_file_info *a, t_file_info *b);
+
+int					f_time_cmp(t_file_info *a, t_file_info *b);
+
+int					f_time_cmp_r(t_file_info *a, t_file_info *b);
+
+void				split(t_file_info *source, t_file_info **front,
+							t_file_info **back);
+
+t_file_info			*merge(t_file_info *a, t_file_info *b,
+						int (*order)(t_file_info *a, t_file_info *b));
+
+void				merge_sort(t_file_info **root,
+						int (*order)(t_file_info *a, t_file_info *b));
+
+void				order_lst(t_file_info **root, t_options *opt);
+
+
 #endif
