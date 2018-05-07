@@ -6,7 +6,7 @@
 /*   By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 20:22:50 by ysibous           #+#    #+#             */
-/*   Updated: 2018/05/05 12:15:56 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/05 17:09:41 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ int		main(int argc, char **argv)
 			i++;
 		}
 	free(opt);
+	while (1){};
 	return (0);
 }

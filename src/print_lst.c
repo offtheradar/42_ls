@@ -6,7 +6,7 @@
 /*   By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:15:11 by ysibous           #+#    #+#             */
-/*   Updated: 2018/05/05 13:23:14 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/06 12:26:11 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ void	print_lst_info(t_file_info *root, t_options *opt)
 			if (opt->l)
 				printf("total %d\n", add_blocks(root, opt));
 		}
-		else if (root->name[0] == '.' && !opt->a)
-			;
 		else
 		{
 			if (opt->l && root != first)

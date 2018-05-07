@@ -6,7 +6,7 @@
 /*   By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 21:01:29 by ysibous           #+#    #+#             */
-/*   Updated: 2018/05/05 12:47:29 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/06 12:15:32 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ typedef	struct			s_file_info
 	char				*name;
 	char				f_type;
 	char				*m_time;
-	long int			m_time_num;
+	int					is_hidden;
+	struct timespec		m_time_num;
 	int					blocks;
 	int					size;
 	int					num_links;

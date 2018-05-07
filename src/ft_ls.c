@@ -6,7 +6,7 @@
 /*   By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:13:30 by ysibous           #+#    #+#             */
-/*   Updated: 2018/05/05 12:37:17 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/06 13:04:47 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,9 @@ void	ft_ls(t_options *opt, char *file_name)
 		{
 			if (root->to_visit)
 			{
-                full_path = ft_strdup(file_name);
+				full_path = ft_strdup(file_name);
                 tmp = ft_strjoin(full_path, "/");
+				free(full_path);
 	            full_path = ft_strjoin(tmp, root->name);
 	            free(tmp);
 				ft_ls(opt, full_path);
