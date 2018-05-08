@@ -6,7 +6,7 @@
 /*   By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 21:01:29 by ysibous           #+#    #+#             */
-/*   Updated: 2018/05/06 12:15:32 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/07 21:04:05 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ void				free_f_info_lst(t_file_info *root);
 ******************************* Print ******************************************
 */
 
-void				print_lst_info(t_file_info *root, t_options *opt);
+void				print_lst_info(t_file_info *root, t_options *opt,
+										int is_first);
 
 void				print_time(t_file_info *root);
 

@@ -6,7 +6,7 @@
 /*   By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/03 12:15:11 by ysibous           #+#    #+#             */
-/*   Updated: 2018/05/06 12:26:11 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/07 21:03:31 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,18 @@ int		add_blocks(t_file_info *root, t_options *opt)
 	return (num_blocks);
 }
 
-void	print_lst_info(t_file_info *root, t_options *opt)
+void	print_l_opt(t_file_info *root, t_options *opt)
+{
+	if (opt->l)
+	{
+		print_permissions(root);
+		printf("%d %s %s %d ", root->num_links, root->owner_name,
+								root->group_name, root->size);
+		print_time(root);
+	}
+}
+
+void	print_lst_info(t_file_info *root, t_options *opt, int is_first)
 {
 	t_file_info *first;
 
@@ -59,21 +70,20 @@ void	print_lst_info(t_file_info *root, t_options *opt)
 	{
 		if (root == first)
 		{
-			printf("%s:\n", root->name);
+			if (is_first != 0)
+				printf("%s:\n", root->name);
 			if (opt->l)
 				printf("total %d\n", add_blocks(root, opt));
 		}
 		else
 		{
-			if (opt->l && root != first)
+			if (!opt->a && root->is_hidden)
 			{
-				print_permissions(root);
-				printf("%d %s %s %d ", root->num_links, root->owner_name,
-										root->group_name, root->size);
-				print_time(root);
+				root = root->next;
+				continue;
 			}
-			if (root != first)
-				printf("%s\n", root->name);
+			print_l_opt(root, opt);
+			printf("%s\n", root->name);
 		}
 		root = root->next;
 	}
