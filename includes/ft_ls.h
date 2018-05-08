@@ -6,7 +6,7 @@
 /*   By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 21:01:29 by ysibous           #+#    #+#             */
-/*   Updated: 2018/05/07 21:04:05 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/08 16:22:03 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ void				ft_ls(t_options *opt, char *file_name);
 /*
 ******************************* ls Helpers *************************************
 */
+
+void				handle_recursion(t_options *opt, t_file_info **root,
+										char *file_name);
 
 void				visit_dir(t_file_info *root, char *file_name);
 

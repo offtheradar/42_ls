@@ -6,13 +6,13 @@
 #    By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/03 19:08:41 by ysibous           #+#    #+#              #
-#    Updated: 2018/05/07 21:05:07 by ysibous          ###   ########.fr        #
+#    Updated: 2018/05/08 16:23:57 by ysibous          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls
 
-CC = clang -g
+CC = gcc
 CFLAGS = -Wall -Wextra -Werror -o
 
 FILES = main.c
