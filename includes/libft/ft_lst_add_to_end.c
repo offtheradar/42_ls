@@ -6,7 +6,7 @@
 /*   By: ysibous <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 15:57:47 by ysibous           #+#    #+#             */
-/*   Updated: 2018/03/20 15:59:52 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/09 20:16:58 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ void	ft_lst_add_to_end(t_list *new_l, t_list **lst)
 		curr = *lst;
 		while (curr->next)
 			curr = curr->next;
-	curr->next = new_l;
+		curr->next = new_l;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 20:57:47 by ysibous           #+#    #+#             */
-/*   Updated: 2018/05/07 20:59:13 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/09 13:05:14 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void			free_f_info_lst(t_file_info *root)
 			free((root)->name);
 		if ((root)->path_name)
 			free(root->path_name);
+		if (root->m_time)
+			free(root->m_time);
 		root = (root)->next;
 		free(tmp);
 	}

@@ -6,7 +6,7 @@
 #    By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/03 19:08:41 by ysibous           #+#    #+#              #
-#    Updated: 2018/05/08 16:23:57 by ysibous          ###   ########.fr        #
+#    Updated: 2018/05/09 12:41:23 by ysibous          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,8 @@ FILES += handle_options.c
 FILES += init_file_info.c
 FILES += load_file_info.c
 FILES += print_lst.c
-FILES += order_lst.c
-FILES += comparaison_helpers.c
+FILES += sort_lst.c
+FILES += sort_comparaison_helpers.c
 
 SRC = $(addprefix src/, $(FILES))
 

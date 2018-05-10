@@ -6,7 +6,7 @@
 /*   By: ysibous <ysibous@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:13:30 by ysibous           #+#    #+#             */
-/*   Updated: 2018/05/08 16:22:41 by ysibous          ###   ########.fr       */
+/*   Updated: 2018/05/08 16:33:18 by ysibous          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,11 @@ void	ft_ls(t_options *opt, char *file_name)
 	static int	is_first;
 
 	root = get_file_info(file_name);
+	if (!root->f_type)
+	{
+		ft_putstr("ft_ls: No such file or directory\n\n");
+		return ;
+	}
 	start = root;
 	order_lst(&(root->next), opt);
 	print_lst_info(root, opt, is_first);
